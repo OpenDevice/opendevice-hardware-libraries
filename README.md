@@ -12,3 +12,6 @@ For now, the implementations were ported to Arduino and Energia.
 Check the list of devices tested:
 
 https://opendevice.atlassian.net/wiki/display/DOC/Documentation#Documentation-SupportedDevices
+
+See docs:
+https://opendevice.atlassian.net/wiki/display/DOC/Getting+started
