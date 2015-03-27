@@ -1,15 +1,11 @@
 #ifndef CommandBuffer_h
 #define CommandBuffer_h
 
+#include <Arduino.h>
 #include <inttypes.h>
-#include <Stream.h>
 #include "Command.h"
 
-class CommandBuffer : public Stream
-{
-protected:
-	int timedRead() { return read(); }
-	int timedPeek() { return peek(); }
+class CommandBuffer{
 private:
    char * _buffer;
    const uint16_t _len;
@@ -20,6 +16,7 @@ private:
 
    int nextEndOffSet();
    bool isListEnd(char c);
+    int peekNextDigit();
 
 public:
   // public methods
@@ -30,10 +27,6 @@ public:
 
   const uint16_t current_length() const { return _endOffset; }
 
-  void begin(long speed) {}
-  bool listen() { return true; }
-  void end() {}
-  bool isListening() { return true; }
   bool overflow() { return _buffer_overflow; }
 
   virtual size_t write(uint8_t byte);
@@ -42,14 +35,26 @@ public:
   virtual int available();
   virtual void flush();
 
+
+  long parseInt(); // returns the first valid (long) integer value from the current position.
+
+  // initial characters that are not digits (or the minus sign) are skipped
+   // integer is terminated by the first character that is not a digit.
+
+  float parseFloat();               // float version of parseInt
+
+  long parseInt(char skipChar); // as above but the given skipChar is ignored
+   // as above but the given skipChar is ignored
+   // this allows format characters (typically commas) in values to be ignored
+
+  float parseFloat(char skipChar);  // as above but the given skipChar is ignored
+
   String readString();
   int readLongValues(long values[], int max);
   int readIntValues(int values[], int max);
   int readFloatValues(float values[], int max);
 
   int getReadOffset(){ return _readOffset; };
-
-  using Print::write;
 };
 
 #endif
