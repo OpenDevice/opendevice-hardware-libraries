@@ -323,7 +323,12 @@ bool OpenDeviceClass::addDevice(Device& device){
 
 		if (device.sensor) {
 			if (device.type == Device::DIGITAL) {
+				#ifdef INPUT_PULLUP
 				pinMode(device.pin, INPUT_PULLUP); // Enable internal pull-up resistor..
+				#endif
+				#ifndef INPUT_PULLUP
+				pinMode(device.pin, INPUT);
+				#endif
 			}
 		} else {
 			pinMode(device.pin, OUTPUT);
@@ -345,7 +350,12 @@ bool OpenDeviceClass::addDevice(uint8_t pin, Device::DeviceType type, bool senso
 
 		if (sensor) {
 			if (type == Device::DIGITAL) {
+				#ifdef INPUT_PULLUP
 				pinMode(pin, INPUT_PULLUP); // Enable internal pull-up resistor..
+				#endif
+				#ifndef INPUT_PULLUP
+				pinMode(pin, INPUT);
+				#endif
 			}
 		} else {
 			pinMode(pin, OUTPUT);
@@ -458,7 +468,7 @@ uint8_t * OpenDeviceClass::generateID(uint8_t apin){
 			Config.id[0] = 0x90; Config.id[1] = 0xA2; Config.id[2] = 0xDA;
 
 			randomSeed(analogRead(apin));
-			Serial.print("MAC.NOTSAVED -");
+//			Serial.print("MAC.NOTSAVED -");
 			for (int i = 3; i < 6; i++) {
 				Config.id[i] = random(0, 255);
 			}
@@ -466,13 +476,13 @@ uint8_t * OpenDeviceClass::generateID(uint8_t apin){
 		}
 	}
 
-	Serial.print("MAC.SAVED:");
-	for (int i = 0; i < 6; ++i) {
-		Serial.print(Config.id[i]);
-		Serial.print(".");
-	}
-	Serial.println();
-	delay(200);
+//	Serial.print("MAC.SAVED:");
+//	for (int i = 0; i < 6; ++i) {
+//		Serial.print(Config.id[i]);
+//		Serial.print(".");
+//	}
+//	Serial.println();
+//	delay(200);
 
 	return Config.id;
 }

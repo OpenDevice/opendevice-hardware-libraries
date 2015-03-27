@@ -50,7 +50,8 @@ void IRDevice::deserializeExtraData(Command *cmd, DeviceConnection *conn){
 //	char *values;
 //	length = conn->readString(&values);
 	String values = conn->readString();
-	if(debug) printf("Values (%d) : %s\n", length, values.c_str());
+
+	// if(debug) printf("Values (%d) : %s\n", length, values.c_str());
 
 	unsigned int rawvalues[length];
 

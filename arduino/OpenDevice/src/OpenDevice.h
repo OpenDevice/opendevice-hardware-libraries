@@ -147,7 +147,11 @@ public:
 	/** Create a simple command (using lastCMD buffer)*/
 	Command cmd(uint8_t type, uint8_t deviceID = 0, unsigned long value = 0);
 
+
+	#ifdef __FlashStringHelper
 	void debug(const __FlashStringHelper* data);
+	#endif
+
 	void debug(const char str[]);
 	#ifdef ARDUINO
 	void debug(const String &s);
