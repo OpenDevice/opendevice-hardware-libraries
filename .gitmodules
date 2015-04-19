@@ -1,9 +1,6 @@
 [submodule "arduino/OpenDevice"]
 	path = arduino/OpenDevice
 	url = https://github.com/OpenDevice/opendevice-lib-arduino
-[submodule "IRremote"]
-	path = IRremote
-	url = https://github.com/shirriff/Arduino-IRremote
 [submodule "arduino/UIPEthernet"]
 	path = arduino/UIPEthernet
 	url = https://github.com/OpenDevice/arduino_uip
