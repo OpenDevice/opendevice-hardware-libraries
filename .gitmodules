@@ -4,3 +4,6 @@
 [submodule "arduino/UIPEthernet"]
 	path = arduino/UIPEthernet
 	url = https://github.com/OpenDevice/arduino_uip
+[submodule "arduino/IRremote"]
+	path = arduino/IRremote
+	url = https://github.com/shirriff/Arduino-IRremote
